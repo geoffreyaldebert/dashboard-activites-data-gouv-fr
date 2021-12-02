@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="chart_container">
-      <h1>{{dataset["nom"]}}</h1>
+    <div class="chart_container" v-if="dataset">
+      <h3>{{dataset["nom"]}}</h3>
       <div class="barchart_tooltip" v-if="tooltip.display" :style="{top:tooltip.top,left:tooltip.left}">
         <div class="tooltip_header">{{tooltip.date}}</div>
         <div class="tooltip_body">
@@ -47,7 +47,6 @@ export default {
     async getData () {
       store.dispatch('getData', this.indicateur).then(data => {
         this.dataset = data
-        console.log(data)
         this.createChart()
       })
     },
@@ -132,6 +131,7 @@ export default {
             }
           }
         })
+
       },100)
     },
 
@@ -142,10 +142,13 @@ export default {
   },
 
   created(){
+
     this.chartId = 'myChart' + Math.floor(Math.random() * (1000))
+    console.log(document.getElementById(self.chartId))
     this.getData()
     
-  }
+  },
+
 
 }
 </script>
