@@ -1,15 +1,15 @@
 import Vue from 'vue'
 
 import store from './store'
-import { getData } from './import.js'
+//import { getData } from './import.js'
 
-import MyComponent from './components/MyComponent'
+import BarChart from './components/BarChart'
 
 import vueCustomElement from 'vue-custom-element'
-Vue.use(getData(store))
+//Vue.use(getData(store))
 
 Vue.config.productionTip = false
 
 Vue.use(vueCustomElement)
 
-Vue.customElement('my-component', MyComponent)
+Vue.customElement('bar-chart', BarChart)
