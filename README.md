@@ -1,4 +1,4 @@
-# Créer des widgets avec VueJS
+# Créer des widgets avec VueJS !
 
 ## Résumé
 
