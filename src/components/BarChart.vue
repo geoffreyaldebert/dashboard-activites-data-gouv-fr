@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="chart_container" v-if="dataset">
+    <div class="chart" v-if="dataset">
       <h3>{{dataset["nom"]}}</h3>
       <div class="barchart_tooltip" v-if="tooltip.display" :style="{top:tooltip.top,left:tooltip.left}">
         <div class="tooltip_header">{{tooltip.date}}</div>
@@ -144,7 +144,6 @@ export default {
   created(){
 
     this.chartId = 'myChart' + Math.floor(Math.random() * (1000))
-    console.log(document.getElementById(self.chartId))
     this.getData()
     
   },
@@ -158,8 +157,8 @@ export default {
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
 
-  .chart_container{
-    max-width: 650px;
+  .chart{
+    width: 100%;
   }
 
   canvas{
