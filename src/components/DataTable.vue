@@ -2,7 +2,8 @@
   <div class="chart" v-if="dataset">
     <h3>{{dataset["nom"]}}</h3>
     <div class="table">
-      <div class="row" :key="r['name']" v-for="r,i in dataset['values']" :style="{background:getBg(r['value'])}">
+      <div class="row" :key="r['name']" v-for="r,i in dataset['values']">
+        <div class="inner_row" :style="{width:getBg(r['value'])}"></div>
         <div class="content">
           <div class="rank">
             {{i+1}}
@@ -39,14 +40,14 @@ export default {
   methods: {
 
     async getData () {
-      const dataRequest = await fetch("data/table.json")
-      const data = await dataRequest.json()
-      this.dataset = data
+      store.dispatch('getData', this.indicateur).then(data => {
+        this.dataset = data
+      })
     },
 
     getBg (value) {
       var p = value/this.dataset["values"][0]["value"]*100
-      return "linear-gradient(90deg, rgba(0, 0, 145,0.5) "+p+"%, #ffffff "+p+"%)"
+      return p+"%"
     }
   },
 
@@ -69,6 +70,10 @@ export default {
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
 
+  @keyframes progress-bar {
+    0% { width: 0; }
+  }
+
   .chart{
     width: 100%;
     height:500px;
@@ -76,10 +81,15 @@ export default {
       width: 100%;
       .row{
         height: 50px;
-        background: linear-gradient(90deg, rgba(0, 0, 145,0.5) 0%, #ffffff 0%);
         border:1px solid black;
         position: relative;
-        transition: all 0.8 ease-in-out;
+        .inner_row{
+          height: 50px;
+          width: 50%;
+          background-color: rgba(0, 0, 145,0.5);
+          position: absolute;
+          animation: progress-bar 0.8s;
+        }
         .content{
           display: block;
           height: auto;
