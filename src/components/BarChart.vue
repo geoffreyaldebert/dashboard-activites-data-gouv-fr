@@ -6,7 +6,7 @@
         <div class="tooltip_header">{{tooltip.date}}</div>
         <div class="tooltip_body">
           <div class="tooltip_value">
-            <span class="legende_dot"></span>
+            <span class="legende_dot" :style="dotStyles"></span>
             {{tooltip.value}}
           </div>
         </div>
@@ -32,15 +32,20 @@ export default {
         left: '0px',
         display: false,
         value: 110,
-        date: ''
+        date: '',
       }
     }
   },
   props: {
-    indicateur: String
+    indicateur: String,
+    color: String
   },
   computed: {
-    
+    dotStyles() {
+      return {
+        "background-color": this.color
+      };
+    }
   },
   methods: {
 
@@ -63,9 +68,9 @@ export default {
       })
 
       let xTickLimit = 6
+      let bgColor = this.color
 
-      setTimeout(function(){
-
+      setTimeout(() => {
         const ctx = document.getElementById(self.chartId).getContext('2d')
         
         this.chart = new Chart(ctx, {
@@ -73,8 +78,8 @@ export default {
             labels: labels,
             datasets: [{
               data: datapoints,
-              backgroundColor: '#000091',
-              borderColor: '#000091',
+              backgroundColor: bgColor,
+              borderColor: bgColor,
               type: 'bar',
               borderWidth: 4
             }]
@@ -194,7 +199,7 @@ export default {
           width: 0.7rem;
           height: 0.7rem;
           border-radius: 50%;
-          background-color: #000091;
+          
           display: inline-block;
           margin-top: 0.25rem;
         }

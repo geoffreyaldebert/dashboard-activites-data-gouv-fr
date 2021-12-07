@@ -1,168 +1,243 @@
 <template>
-  <div>
-    <div class="widget">
-      <div class="widgetHeader">
-        <div class="titleHeader">
-          <h3>Nouveaux jeux de données créés</h3>
+  <div class="homepage">
+    <div class="menu">
+        <div class="menuContent">
+          <nav class="fr-sidemenu fr-sidemenu--sticky-full-height fr-pr-0" role="navigation" aria-label="Menu latéral">
+            <div class="fr-sidemenu__inner">
+              <div class="fr-collapse fr-pt-0 fr-pt-md-4w fr-pb-md-11w" id="fr-sidemenu-wrapper">
+                <div class="fr-sidemenu__title">Changer de période</div>
+                <div class="buttonsHeader">
+                  <div :class="period === 'month' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('month')">Mensuel</div>
+                  <div :class="period === 'week' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('week')">Hebdomadaire</div>
+                  <div :class="period === 'day' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('day')">Quotidien</div>
+                </div>
+                <div class="fr-sidemenu__title">Choisissez un indicateur :</div>
+                <ul class="fr-sidemenu__list">
+                  <li class="fr-sidemenu__item">
+                    <div class="fr-collapse fr-collapse--expanded" id="vue_d_ensemble" style="max-height: none; --collapse:-312px;">
+                      <ul class="fr-sidemenu__list">
+                        <li class="fr-sidemenu__item fr-sidemenu__item--active">
+                          <a class="fr-sidemenu__link" href="#visites" target="_self">Visites</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#visiteurs-uniques" target="_self">Visiteurs uniques</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#telechargements" target="_self">Téléchargements</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#top10datasets" target="_self">Top 10 des jeux de données</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#top10reuses" target="_self">Top 10 des réutilisations</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#datasets" target="_self">Nombre de nouveaux jeux de données</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#reuses" target="_self">Nombre de nouvelles réutilisations</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#orgas" target="_self">Nombre de nouvelles organisations</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#discussions" target="_self">Nombre de nouvelles discussions</a>
+                        </li>
+                        <li class="fr-sidemenu__item">
+                          <a class="fr-sidemenu__link" href="#users" target="_self">Nombre de nouveaux utilisateurs</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                 
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
-        <div class="buttonsHeader">
-          <div v-for="item in buttons" @click='changePeriodDataset(item)' v-bind:key="item.label" :class="item.value === periodDatasetSelected ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'">{{ item.label }}</div>
-        </div>
-      </div>
-      <br /> 
-      <div>
-        <div v-if="periodDatasetSelected === 0" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_datasets-day"></bar-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodDatasetSelected === 1" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_datasets-week"></bar-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodDatasetSelected === 2" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_datasets-month"></bar-chart>
-        </div>
-      </div>
     </div>
+    <div class="widgets">
 
-    <div class="widget">
-      <div class="widgetHeader">
-        <div class="titleHeader">
-          <h3>Nouvelles réutilisations créées</h3>
-        </div>
-        <div class="buttonsHeader">
-          <div v-for="item in buttons" @click='changePeriodReuse(item)' v-bind:key="item.label" :class="item.value === periodReuseSelected ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'">{{ item.label }}</div>
+      <div id="visites" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-visites-day"></line-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-visites-week"></line-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-visites-month"></line-chart>
+          </div>
         </div>
       </div>
-      <br /> 
-      <div>
-        <div v-if="periodReuseSelected === 0" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_reuses-day"></bar-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodReuseSelected === 1" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_reuses-week"></bar-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodReuseSelected === 2" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_reuses-month"></bar-chart>
-        </div>
-      </div>
-    </div>
 
-    <div class="widget">
-      <div class="widgetHeader">
-        <div class="titleHeader">
-          <h3>Nouvelles discussions créées</h3>
+      <div id="visiteurs-uniques" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-visiteurs-uniques-day"></line-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-visiteurs-uniques-week"></line-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-visiteurs-uniques-month"></line-chart>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_discussions-day"></bar-chart>
-        </div>
-      </div>
-    </div>
 
-    <div class="widget">
-      <div class="widgetHeader">
-        <div class="titleHeader">
-          <h3>Nouveaux utilisateurs créées</h3>
+      <div id="telechargements" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-telechargement-day"></line-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-telechargement-week"></line-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <line-chart indicateur="matomo-global-telechargement-month"></line-chart>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <bar-chart indicateur="nb_users-day"></bar-chart>
-        </div>
-      </div>
-    </div>
-    <br />
 
+      <div id="top10datasets" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <data-table indicateur="matomo-tops-datasets-day" color="rgba(202,202,251,0.5)"></data-table>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <data-table indicateur="matomo-tops-datasets-week" color="rgba(202,202,251,0.5)"></data-table>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <data-table indicateur="matomo-tops-datasets-month" color="rgba(202,202,251,0.5)"></data-table>
+          </div>
+        </div>
+      </div>
 
-    <div class="widget">
-      <div class="widgetHeader">
-        <div class="titleHeader">
-          <h3>Visites Datagouv</h3>
-        </div>
-        <div class="buttonsHeader">
-          <div v-for="item in buttons" @click='changePeriodVisit(item)' v-bind:key="item.label" :class="item.value === periodVisitSelected ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'">{{ item.label }}</div>
+      <div id="top10reuses" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <data-table indicateur="matomo-tops-reuses-day" color="rgba(31,141,73,0.3)"></data-table>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <data-table indicateur="matomo-tops-reuses-week" color="rgba(31,141,73,0.3)"></data-table>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <data-table indicateur="matomo-tops-reuses-month" color="rgba(31,141,73,0.3)"></data-table>
+          </div>
         </div>
       </div>
-      <br /> 
-      <div>
-        <div v-if="periodVisitSelected === 0" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visites-day-matomo-global"></line-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodVisitSelected === 1" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visites-week-matomo-global"></line-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodVisitSelected === 2" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visites-month-matomo-global"></line-chart>
-        </div>
-      </div>
-    </div>
-    <br />
 
-    <div class="widget">
-      <div class="widgetHeader">
-        <div class="titleHeader">
-          <h3>Visiteurs uniques Datagouv</h3>
-        </div>
-        <div class="buttonsHeader">
-          <div v-for="item in buttons" @click='changePeriodVisitor(item)' v-bind:key="item.label" :class="item.value === periodVisitorSelected ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'">{{ item.label }}</div>
+      <div id="datasets" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-datasets-day" color="#869ECE"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-datasets-week" color="#869ECE"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-datasets-month" color="#869ECE"></bar-chart>
+          </div>
         </div>
       </div>
-      <br /> 
-      <div>
-        <div v-if="periodVisitorSelected === 0" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visiteurs-uniques-day-matomo-global"></line-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodVisitorSelected === 1" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visiteurs-uniques-week-matomo-global"></line-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodVisitorSelected === 2" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visiteurs-uniques-month-matomo-global"></line-chart>
-        </div>
-      </div>
-    </div>
-    <br />
 
-    <div class="widget">
-      <div class="widgetHeader">
-        <div class="titleHeader">
-          <h3>Téléchargements Datagouv</h3>
-        </div>
-        <div class="buttonsHeader">
-          <div v-for="item in buttons" @click='changePeriodDownload(item)' v-bind:key="item.label" :class="item.value === periodDownloadSelected ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'">{{ item.label }}</div>
+      <div id="reuses" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-reuses-day" color="#21AB8E"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-reuses-week" color="#21AB8E"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-reuses-month" color="#21AB8E"></bar-chart>
+          </div>
         </div>
       </div>
-      <br /> 
-      <div>
-        <div v-if="periodDownloadSelected === 0" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visites-day-matomo-global"></line-chart>
-        </div>
-        </div>
+
+      <div id="orgas" class="widget">
         <div>
-        <div v-if="periodDownloadSelected === 1" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visites-week-matomo-global"></line-chart>
-        </div>
-        </div>
-        <div>
-        <div v-if="periodDownloadSelected === 2" class="chart_container" style="max-width: 600px; margin-left: 30px;">
-            <line-chart indicateur="visites-month-matomo-global"></line-chart>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-orgas-day" color="#E4794A"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-orgas-week" color="#E4794A"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-orgas-month" color="#E4794A"></bar-chart>
+          </div>
         </div>
       </div>
+
+      <div id="discussions" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-discussions-day" color="#34BAB5"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-discussions-week" color="#34BAB5"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-discussions-month" color="#34BAB5"></bar-chart>
+          </div>
+        </div>
+      </div>
+
+      <div id="users" class="widget">
+        <div>
+          <div v-if="period === 'day'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-users-day" color="#A558A0"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'week'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-users-week" color="#A558A0"></bar-chart>
+          </div>
+          </div>
+          <div>
+          <div v-if="period === 'month'" class="chart_container" style="max-width: 600px; margin-left: 30px;">
+              <bar-chart indicateur="stats-datagouv-users-month" color="#A558A0"></bar-chart>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -197,22 +272,34 @@ export default {
       ],
       periodDatasetSelected: 0,
       periodReuseSelected: 0,
+      periodOrgaSelected: 0,
+      periodDiscussionSelected: 0,
+      periodUserSelected: 0,
       periodVisitorSelected: 0,
       periodVisitSelected: 0,
-      periodDownloadSelected: 0
+      periodDownloadSelected: 0,
+      periodTop10DatasetSelected: 0,
+      periodTop10ReuseSelected: 0,
+      period: 'month'
     }
   },
   props: {
   },
   computed: {
   },
-  methods: {    
+  methods: {
+    changePeriod (period) {
+      this.period = period;
+    },
     changePeriodDataset (item) {
       this.periodDatasetSelected = item.value
     }, 
     changePeriodReuse (item) {
       this.periodReuseSelected = item.value
-    }, 
+    },
+    changePeriodOrga (item) {
+      this.periodOrgaSelected = item.value
+    },
     changePeriodVisit (item) {
       this.periodVisitSelected = item.value
     }, 
@@ -221,6 +308,12 @@ export default {
     }, 
     changePeriodDownload (item) {
       this.periodDownloadSelected = item.value
+    }, 
+    changePeriodTop10Dataset (item) {
+      this.periodTop10DatasetSelected = item.value
+    }, 
+    changePeriodTop10Reuse (item) {
+      this.periodTop10ReuseSelected = item.value
     }
   },
   watch:{
@@ -233,8 +326,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.homepage{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.menu{
+  width: 380px;
+}
+
+.menuContent{
+  width: 380px;
+  position: fixed;
+}
+
 .widget{
-  max-width: 800px;
+  max-width: 900px;
   margin: 20px;
   padding: 20px;
   border: 1px solid #ebebeb;
@@ -258,8 +367,9 @@ export default {
   border: 1px solid #ebebeb;
   margin-right: 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 .buttonHeader:hover{
   background-color: #000091;
