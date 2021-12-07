@@ -21,7 +21,7 @@ import store from '@/store'
 import { mixin } from '@/utils.js'
 import Chart from 'chart.js'
 export default {
-  name: 'BarChart',
+  name: 'LineChart',
   mixins: [mixin],
   data(){
     return {
@@ -67,17 +67,25 @@ export default {
       setTimeout(function(){
 
         const ctx = document.getElementById(self.chartId).getContext('2d')
-        
+        let gradientFill
+        this.display === 'big' ? gradientFill = ctx.createLinearGradient(0, 0, 0, 500) : gradientFill = ctx.createLinearGradient(0, 0, 0, 250)
+        gradientFill.addColorStop(0, 'rgba(218, 218, 254, 0.6)')
+        gradientFill.addColorStop(0.6, 'rgba(245, 245, 255, 0)')
         this.chart = new Chart(ctx, {
           data: {
             labels: labels,
             datasets: [{
               data: datapoints,
-              backgroundColor: '#000091',
+              backgroundColor: gradientFill,
               borderColor: '#000091',
-              type: 'bar',
-              borderWidth: 4
-            }]
+              type: 'line',
+              borderWidth: 4,
+              pointRadius: 8,
+              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+              pointBorderColor: 'rgba(0, 0, 0, 0)',
+              pointHoverBackgroundColor: 'rgba(0, 0, 145, 1)',
+              pointHoverRadius: 6
+            }]   
           },
           options: {
             animation: {
