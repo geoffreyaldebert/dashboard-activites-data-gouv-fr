@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const BASE_URL = 'https://object.files.data.gouv.fr/opendata/test'
+const BASE_URL = 'https://object.files.data.gouv.fr/opendata/dashboard-activites/latest'
 
 export default new Vuex.Store({
   state: {

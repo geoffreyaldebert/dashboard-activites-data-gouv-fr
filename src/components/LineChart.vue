@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="chart" v-if="dataset">
+    <div class="chart_container" v-if="dataset">
       <h3>{{dataset["nom"]}}</h3>
       <div class="barchart_tooltip" v-if="tooltip.display" :style="{top:tooltip.top,left:tooltip.left}">
         <div class="tooltip_header">{{tooltip.date}}</div>
         <div class="tooltip_body">
           <div class="tooltip_value">
-            <span class="legende_dot" :style="dotStyles"></span>
+            <span class="legende_dot"></span>
             {{tooltip.value}}
           </div>
         </div>
@@ -21,7 +21,7 @@ import store from '@/store'
 import { mixin } from '@/utils.js'
 import Chart from 'chart.js'
 export default {
-  name: 'BarChart',
+  name: 'LineChart',
   mixins: [mixin],
   data(){
     return {
@@ -32,20 +32,15 @@ export default {
         left: '0px',
         display: false,
         value: 110,
-        date: '',
+        date: ''
       }
     }
   },
   props: {
-    indicateur: String,
-    color: String
+    indicateur: String
   },
   computed: {
-    dotStyles() {
-      return {
-        "background-color": this.color
-      };
-    }
+    
   },
   methods: {
 
@@ -68,21 +63,29 @@ export default {
       })
 
       let xTickLimit = 6
-      let bgColor = this.color
 
-      setTimeout(() => {
+      setTimeout(function(){
+
         const ctx = document.getElementById(self.chartId).getContext('2d')
-        
+        let gradientFill
+        this.display === 'big' ? gradientFill = ctx.createLinearGradient(0, 0, 0, 500) : gradientFill = ctx.createLinearGradient(0, 0, 0, 250)
+        gradientFill.addColorStop(0, 'rgba(218, 218, 254, 0.6)')
+        gradientFill.addColorStop(0.6, 'rgba(245, 245, 255, 0)')
         this.chart = new Chart(ctx, {
           data: {
             labels: labels,
             datasets: [{
               data: datapoints,
-              backgroundColor: bgColor,
-              borderColor: bgColor,
-              type: 'bar',
-              borderWidth: 4
-            }]
+              backgroundColor: gradientFill,
+              borderColor: '#000091',
+              type: 'line',
+              borderWidth: 4,
+              pointRadius: 8,
+              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+              pointBorderColor: 'rgba(0, 0, 0, 0)',
+              pointHoverBackgroundColor: 'rgba(0, 0, 145, 1)',
+              pointHoverRadius: 6
+            }]   
           },
           options: {
             animation: {
@@ -113,7 +116,7 @@ export default {
                   maxRotation: 0,
                   minRotation: 0,
                   callback: function (value) {
-                    return value
+                    return value.toString().substring(5, 7) + '/' + value.toString().substring(2, 4)
                   }
                 },
                 offset: true
@@ -150,6 +153,7 @@ export default {
   created(){
 
     this.chartId = 'myChart' + Math.floor(Math.random() * (1000))
+    console.log(document.getElementById(self.chartId))
     this.getData()
     
   },
@@ -163,8 +167,8 @@ export default {
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
 
-  .chart{
-    width: 100%;
+  .chart_container{
+    max-width: 650px;
   }
 
   canvas{
@@ -198,7 +202,7 @@ export default {
           width: 0.7rem;
           height: 0.7rem;
           border-radius: 50%;
-          
+          background-color: #000091;
           display: inline-block;
           margin-top: 0.25rem;
         }
