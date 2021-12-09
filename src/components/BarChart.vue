@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="chart_container" v-if="dataset">
+    <div class="chart" v-if="dataset">
       <h3>{{dataset["nom"]}}</h3>
       <div class="barchart_tooltip" v-if="tooltip.display" :style="{top:tooltip.top,left:tooltip.left}">
         <div class="tooltip_header">{{tooltip.date}}</div>
@@ -27,6 +27,7 @@ export default {
     return {
       dataset:undefined,
       chartId: '',
+      unite:'',
       tooltip: {
         top: '0px',
         left: '0px',
@@ -52,6 +53,7 @@ export default {
     async getData () {
       store.dispatch('getData', this.indicateur).then(data => {
         this.dataset = data
+        this.unite = data["unite"]
         this.createChart()
       })
     },
@@ -96,8 +98,13 @@ export default {
               self.tooltip.left = (e.target.getBoundingClientRect().left + this.chart.scales['x-axis-0'].getPixelForTick(index) + 25) + 'px'
               self.tooltip.display = true
 
-              self.tooltip.value = datapoints[index]
-              self.tooltip.date = labels[index]
+              self.tooltip.value = datapoints[index]+" "+self.unite
+
+              var date = new Date(labels[index])
+              const options = {month: 'long', year: 'numeric'};
+              var ndate = date.toLocaleDateString('fr-FR',options)
+              self.tooltip.date = ndate
+
             } else {
               self.tooltip.display = false
             }
@@ -113,7 +120,7 @@ export default {
                   maxRotation: 0,
                   minRotation: 0,
                   callback: function (value) {
-                    return value
+                    return value.toString().substring(5, 7) + '/' + value.toString().substring(2, 4)
                   }
                 },
                 offset: true
@@ -150,7 +157,6 @@ export default {
   created(){
 
     this.chartId = 'myChart' + Math.floor(Math.random() * (1000))
-    console.log(document.getElementById(self.chartId))
     this.getData()
     
   },
@@ -164,8 +170,8 @@ export default {
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
 
-  .chart_container{
-    max-width: 650px;
+  .chart{
+    width: 100%;
   }
 
   canvas{
