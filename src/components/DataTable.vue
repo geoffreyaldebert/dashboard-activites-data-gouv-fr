@@ -8,11 +8,8 @@
           <div class="rank">
             {{i+1}}
           </div>
-          <div v-if="r['name'].length <= 65" class="name">
-            {{r['name']}}
-          </div>
-          <div v-if="r['name'].length > 65" class="name">
-            {{r['name'].substring(0,60)}}...
+          <div class="name">
+            {{pruneName(r['name'])}}
           </div>
           <div class="value">
             {{r['value']}}
@@ -43,12 +40,15 @@ export default {
       return {
         "background-color": this.color
       };
+    },
+    selectedPeriode () {
+      return store.state.selectedPeriode
     }
-    
   },
   methods: {
     async getData () {
-      store.dispatch('getData', this.indicateur).then(data => {
+      var url = this.indicateur+"-"+this.selectedPeriode
+      store.dispatch('getData', url).then(data => {
         this.dataset = data
       })
     },
@@ -56,13 +56,21 @@ export default {
       var p = value/this.dataset["values"][0]["value"]*100
       return p+"%"
     },
-    goToLink(url) {
-      console.log(url)
+    goToLink (url) {
       window.open(url, '_blank');
+    },
+    pruneName (name) {
+      return name.substring(0,60)
+    },
+    updateChart () {
+      this.dataset = {}
+      this.getData()
     }
   },
   watch:{
-    
+    selectedPeriode: function () {
+      this.updateChart()
+    }
   },
   created(){
     this.getData()

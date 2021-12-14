@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     promises: {},
     data: {},
+    selectedPeriode:"month"
   },
   actions: {
     getData ({ commit, state }, indicator) {
@@ -33,5 +34,8 @@ export default new Vuex.Store({
     setData (state, payload) {
       state.data[payload.indicator] = payload.data
     },
+    setPeriode (state, periode) {
+      state.selectedPeriode = periode
+    }
   }
 })

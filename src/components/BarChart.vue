@@ -42,16 +42,23 @@ export default {
     color: String
   },
   computed: {
+
     dotStyles() {
       return {
         "background-color": this.color
       };
+    },
+
+    selectedPeriode () {
+      return store.state.selectedPeriode
     }
+
   },
   methods: {
 
     async getData () {
-      store.dispatch('getData', this.indicateur).then(data => {
+      var url = this.indicateur+"-"+this.selectedPeriode
+      store.dispatch('getData', url).then(data => {
         this.dataset = data
         this.unite = data["unite"]
         this.createChart()
@@ -148,10 +155,18 @@ export default {
       },100)
     },
 
+    updateChart () {
+      this.getData()
+      this.chart.destroy()
+      this.chart.update()
+    }
+
   },
 
   watch:{
-    
+    selectedPeriode: function () {
+      this.updateChart()
+    }
   },
 
   created(){
