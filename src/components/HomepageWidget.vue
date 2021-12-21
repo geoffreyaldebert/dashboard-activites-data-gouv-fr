@@ -183,7 +183,7 @@ export default {
 
 .menuContent{
   width: 380px;
-  position: fixed;
+  //position: fixed;
 }
 
 .widget{
