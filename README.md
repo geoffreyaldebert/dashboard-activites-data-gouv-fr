@@ -4,3 +4,11 @@ Webapp permettant d'afficher des indicateurs synthétiques sur l'activité (audi
 
 Ce tableau de bord a utilisé la philosophie des widgets développés [sur ce repo](https://github.com/etalab/dashboard-widgets-template).
 
+### Install
+
+```
+npm install
+npm run serve
+# ou 
+npm run build
+```
