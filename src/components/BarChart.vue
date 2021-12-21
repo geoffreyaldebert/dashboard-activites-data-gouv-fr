@@ -6,7 +6,7 @@
         <div class="tooltip_header">{{tooltip.date}}</div>
         <div class="tooltip_body">
           <div class="tooltip_value">
-            <span class="legende_dot"></span>
+            <span class="legende_dot" :style="dotStyles"></span>
             {{tooltip.value}}
           </div>
         </div>
@@ -27,26 +27,40 @@ export default {
     return {
       dataset:undefined,
       chartId: '',
+      unite:'',
       tooltip: {
         top: '0px',
         left: '0px',
         display: false,
         value: 110,
-        date: ''
+        date: '',
       }
     }
   },
   props: {
-    indicateur: String
+    indicateur: String,
+    color: String
   },
   computed: {
-    
+
+    dotStyles() {
+      return {
+        "background-color": this.color
+      };
+    },
+
+    selectedPeriode () {
+      return store.state.selectedPeriode
+    }
+
   },
   methods: {
 
     async getData () {
-      store.dispatch('getData', this.indicateur).then(data => {
+      var url = this.indicateur+"-"+this.selectedPeriode
+      store.dispatch('getData', url).then(data => {
         this.dataset = data
+        this.unite = data["unite"]
         this.createChart()
       })
     },
@@ -63,9 +77,9 @@ export default {
       })
 
       let xTickLimit = 6
+      let bgColor = this.color
 
-      setTimeout(function(){
-
+      setTimeout(() => {
         const ctx = document.getElementById(self.chartId).getContext('2d')
         
         this.chart = new Chart(ctx, {
@@ -73,8 +87,8 @@ export default {
             labels: labels,
             datasets: [{
               data: datapoints,
-              backgroundColor: '#000091',
-              borderColor: '#000091',
+              backgroundColor: bgColor,
+              borderColor: bgColor,
               type: 'bar',
               borderWidth: 4
             }]
@@ -91,8 +105,13 @@ export default {
               self.tooltip.left = (e.target.getBoundingClientRect().left + this.chart.scales['x-axis-0'].getPixelForTick(index) + 25) + 'px'
               self.tooltip.display = true
 
-              self.tooltip.value = datapoints[index]
-              self.tooltip.date = labels[index]
+              self.tooltip.value = datapoints[index]+" "+self.unite
+
+              var date = new Date(labels[index])
+              const options = {month: 'long', year: 'numeric'};
+              var ndate = date.toLocaleDateString('fr-FR',options)
+              self.tooltip.date = ndate
+
             } else {
               self.tooltip.display = false
             }
@@ -108,9 +127,10 @@ export default {
                   maxRotation: 0,
                   minRotation: 0,
                   callback: function (value) {
-                    return value
+                    return value.toString().substring(5, 7) + '/' + value.toString().substring(2, 4)
                   }
-                }
+                },
+                offset: true
               }],
               yAxes: [{
                 gridLines: {
@@ -135,10 +155,18 @@ export default {
       },100)
     },
 
+    updateChart () {
+      this.getData()
+      this.chart.destroy()
+      this.chart.update()
+    }
+
   },
 
   watch:{
-    
+    selectedPeriode: function () {
+      this.updateChart()
+    }
   },
 
   created(){
@@ -192,7 +220,7 @@ export default {
           width: 0.7rem;
           height: 0.7rem;
           border-radius: 50%;
-          background-color: #000091;
+          
           display: inline-block;
           margin-top: 0.25rem;
         }

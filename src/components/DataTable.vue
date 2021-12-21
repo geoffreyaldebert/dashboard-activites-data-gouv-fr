@@ -2,14 +2,14 @@
   <div class="chart" v-if="dataset">
     <h3>{{dataset["nom"]}}</h3>
     <div class="table">
-      <div class="row" :key="r['name']" v-for="r,i in dataset['values']">
-        <div class="inner_row" :style="{width:getBg(r['value'])}"></div>
+      <div class="row" :key="r['name']" v-for="r,i in dataset['values']" @click="goToLink(r['url'])">
+        <div class="inner_row" :style="{width:getBg(r['value']), backgroundColor: color}"></div>
         <div class="content">
           <div class="rank">
             {{i+1}}
           </div>
           <div class="name">
-            {{r['name']}}
+            {{pruneName(r['name'])}}
           </div>
           <div class="value">
             {{r['value']}}
@@ -32,61 +32,76 @@ export default {
     }
   },
   props: {
-    indicateur: String
+    indicateur: String,
+    color: String,
   },
   computed: {
-    
+    rowStyle() {
+      return {
+        "background-color": this.color
+      };
+    },
+    selectedPeriode () {
+      return store.state.selectedPeriode
+    }
   },
   methods: {
-
     async getData () {
-      store.dispatch('getData', this.indicateur).then(data => {
+      var url = this.indicateur+"-"+this.selectedPeriode
+      store.dispatch('getData', url).then(data => {
         this.dataset = data
       })
     },
-
     getBg (value) {
       var p = value/this.dataset["values"][0]["value"]*100
       return p+"%"
+    },
+    goToLink (url) {
+      window.open(url, '_blank');
+    },
+    pruneName (name) {
+      return name.substring(0,60)
+    },
+    updateChart () {
+      this.dataset = {}
+      this.getData()
     }
   },
-
   watch:{
-    
+    selectedPeriode: function () {
+      this.updateChart()
+    }
   },
-
   created(){
-
     this.getData()
     
   },
-
-
 }
 </script>
 
 <style scoped lang="scss">
-
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
-
   @keyframes progress-bar {
     0% { width: 0; }
   }
-
   .chart{
     width: 100%;
-    height:500px;
+    height:700px;
     .table{
       width: 100%;
       .row{
+        cursor: pointer;
         height: 50px;
-        border:1px solid black;
+        margin-bottom: 10px;
+        font-size: 14px;
         position: relative;
+        .name{
+            max-width: 80%;
+        }
         .inner_row{
           height: 50px;
           width: 50%;
-          background-color: rgba(0, 0, 145,0.5);
           position: absolute;
           animation: progress-bar 0.8s;
         }
@@ -112,5 +127,4 @@ export default {
       }
     }
   }
-
 </style>
