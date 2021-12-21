@@ -128,7 +128,17 @@ export default {
                 },
                 ticks: {
                   autoSkip: true,
-                  maxTicksLimit: 5
+                  maxTicksLimit: 5,
+                  callback: function (value, index, values) {
+                    if (value >= 1000000000 || value <= -1000000000) {
+                      return value / 1e9 + 'B'
+                    } else if (value >= 1000000 || value <= -1000000) {
+                      return value / 1e6 + 'M'
+                    } else if (value >= 1000 || value <= -1000) {
+                      return value / 1e3 + 'K'
+                    }
+                    return value
+                  }
                 }
               }]
             },
