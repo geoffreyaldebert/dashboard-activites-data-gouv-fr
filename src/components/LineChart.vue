@@ -145,7 +145,7 @@ export default {
               },
               title: function (tooltipItems) {
                 var date = new Date(tooltipItems[0].label)
-                const options = {month: 'long', year: 'numeric'};
+                const options = {day: 'numeric', month: 'long', year: 'numeric'};
                 var ndate = date.toLocaleDateString('fr-FR',options)
                 return ndate
               },

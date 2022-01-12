@@ -2,9 +2,9 @@
   <div>
     <div class="fr-sidemenu__title">Changer de période</div>
     <div class="buttonsHeader">
-      <div :class="selectedPeriode === 'month' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('month')">Mensuel</div>
-      <div :class="selectedPeriode === 'week' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('week')">Hebdomadaire</div>
-      <div :class="selectedPeriode === 'day' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('day')">Quotidien</div>
+      <div :class="selectedPeriode === 'monthly' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('monthly')">Mensuel</div>
+      <div :class="selectedPeriode === 'weekly' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('weekly')">Hebdomadaire</div>
+      <div :class="selectedPeriode === 'daily' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('daily')">Quotidien</div>
     </div>
 </div>
 </template>

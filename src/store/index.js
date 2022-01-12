@@ -3,13 +3,13 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const BASE_URL = 'https://object.files.data.gouv.fr/opendata/dashboard-activites/latest'
+const BASE_URL = 'https://object.files.data.gouv.fr/opendata/datagouv/dashboard'
 
 export default new Vuex.Store({
   state: {
     promises: {},
     data: {},
-    selectedPeriode:"month"
+    selectedPeriode:"monthly"
   },
   actions: {
     getData ({ commit, state }, indicator) {

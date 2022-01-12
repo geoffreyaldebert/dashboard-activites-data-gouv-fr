@@ -56,7 +56,7 @@
       <div id="visites" class="widget">
         <div>
           <div class="chart_container">
-              <line-chart indicateur="matomo-global-visites"></line-chart>
+              <line-chart indicateur="matomo-stats-visits"></line-chart>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
       <div id="visiteurs-uniques" class="widget">
         <div>
           <div class="chart_container">
-              <line-chart indicateur="matomo-global-visiteurs-uniques"></line-chart>
+              <line-chart indicateur="matomo-stats-uniq_visits"></line-chart>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
       <div id="telechargements" class="widget">
         <div>
           <div class="chart_container">
-              <line-chart indicateur="matomo-global-telechargement"></line-chart>
+              <line-chart indicateur="matomo-stats-downloads"></line-chart>
           </div>
         </div>
       </div>

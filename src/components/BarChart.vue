@@ -108,7 +108,7 @@ export default {
               self.tooltip.value = datapoints[index]+" "+self.unite
 
               var date = new Date(labels[index])
-              const options = {month: 'long', year: 'numeric'};
+              const options = {day: 'numeric', month: 'long', year: 'numeric'};
               var ndate = date.toLocaleDateString('fr-FR',options)
               self.tooltip.date = ndate
 
