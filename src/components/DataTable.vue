@@ -1,18 +1,20 @@
 <template>
-  <div class="chart" v-if="dataset">
-    <h3>{{dataset["nom"]}}</h3>
-    <div class="table">
-      <div class="row" :key="r['name']" v-for="r,i in dataset['values']" @click="goToLink(r['url'])">
-        <div class="inner_row" :style="{width:getBg(r['value']), backgroundColor: color}"></div>
-        <div class="content">
-          <div class="rank">
-            {{i+1}}
-          </div>
-          <div class="name">
-            {{pruneName(r['name'])}}
-          </div>
-          <div class="value">
-            {{r['value']}}
+  <div class="widget">
+    <div class="chart" v-if="dataset">
+      <h6>{{dataset["nom"]}}</h6>
+      <div class="table">
+        <div class="row" :key="r['name']" v-for="r,i in dataset['values']" @click="goToLink(r['url'])">
+          <div class="inner_row" :style="{width:getBg(r['value']), backgroundColor: color}"></div>
+          <div class="content">
+            <div class="rank">
+              {{i+1}}
+            </div>
+            <div class="name">
+              {{pruneName(r['name'])}}
+            </div>
+            <div class="value">
+              {{r['value']}}
+            </div>
           </div>
         </div>
       </div>
@@ -80,6 +82,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .widget{
+    max-width: 500px;
+  }
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
   @keyframes progress-bar {

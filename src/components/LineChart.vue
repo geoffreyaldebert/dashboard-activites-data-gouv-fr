@@ -1,16 +1,18 @@
 <template>
   <div>
-    <div class="chart_container" v-if="dataset">
-      <h3>{{dataset["nom"]}}</h3>
-      <div class="linechart_tooltip">
-          <div class="tooltip_header"></div>
-          <div class="tooltip_body">
-            <div class="tooltip_value">
-              <span class="tooltip_dot"></span>
+    <div class="widget">
+      <div class="chart_container" v-if="dataset">
+        <h6>{{dataset["nom"]}}</h6>
+        <div class="linechart_tooltip">
+            <div class="tooltip_header"></div>
+            <div class="tooltip_body">
+              <div class="tooltip_value">
+                <span class="tooltip_dot"></span>
+              </div>
             </div>
           </div>
-        </div>
-      <canvas :id="chartId"></canvas>
+        <canvas :id="chartId"></canvas>
+      </div>
     </div>
   </div>
 </template>
@@ -63,6 +65,7 @@ export default {
       })
 
       let xTickLimit = 6
+      let period = this.selectedPeriode
 
       setTimeout(function(){
 
@@ -102,7 +105,14 @@ export default {
                   maxRotation: 0,
                   minRotation: 0,
                   callback: function (value) {
-                    return value.toString().substring(5, 7) + '/' + value.toString().substring(2, 4)
+                    let formula = ''
+                    if(period == 'daily' || period == 'weekly'){
+                      formula = value.toString().substring(8, 10) + '/' + value.toString().substring(5,7)
+                    }
+                    if(period == 'monthly') {
+                      formula = value.toString().substring(5, 7) + '/' + value.toString().substring(2,4)
+                    }
+                    return formula
                   }
                 },
                 offset: true
@@ -240,12 +250,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .widget{
+    max-width: 500px;
+  }
 
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
 
   .chart_container{
-    max-width: 650px;
+    width: 100%;
   }
 
   canvas{

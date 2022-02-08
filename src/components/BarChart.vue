@@ -1,17 +1,19 @@
 <template>
   <div>
-    <div class="chart" v-if="dataset">
-      <h3>{{dataset["nom"]}}</h3>
-      <div class="barchart_tooltip" v-if="tooltip.display" :style="{top:tooltip.top,left:tooltip.left}">
-        <div class="tooltip_header">{{tooltip.date}}</div>
-        <div class="tooltip_body">
-          <div class="tooltip_value">
-            <span class="legende_dot" :style="dotStyles"></span>
-            {{tooltip.value}}
+    <div class="widget">
+      <div class="chart" v-if="dataset">
+        <h6>{{dataset["nom"]}}</h6>
+        <div class="barchart_tooltip" v-if="tooltip.display" :style="{top:tooltip.top,left:tooltip.left}">
+          <div class="tooltip_header">{{tooltip.date}}</div>
+          <div class="tooltip_body">
+            <div class="tooltip_value">
+              <span class="legende_dot" :style="dotStyles"></span>
+              {{tooltip.value}}
+            </div>
           </div>
         </div>
+        <canvas :id="chartId"></canvas>
       </div>
-      <canvas :id="chartId"></canvas>
     </div>
   </div>
 </template>
@@ -78,6 +80,7 @@ export default {
 
       let xTickLimit = 6
       let bgColor = this.color
+      let period = this.selectedPeriode
 
       setTimeout(() => {
         const ctx = document.getElementById(self.chartId).getContext('2d')
@@ -127,7 +130,14 @@ export default {
                   maxRotation: 0,
                   minRotation: 0,
                   callback: function (value) {
-                    return value.toString().substring(5, 7) + '/' + value.toString().substring(2, 4)
+                    let formula = ''
+                    if(period == 'daily' || period == 'weekly'){
+                      formula = value.toString().substring(8, 10) + '/' + value.toString().substring(5,7)
+                    }
+                    if(period == 'monthly') {
+                      formula = value.toString().substring(5, 7) + '/' + value.toString().substring(2,4)
+                    }
+                    return formula
                   }
                 },
                 offset: true
@@ -181,6 +191,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .widget{
+    max-width: 500px;
+  }
 
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
