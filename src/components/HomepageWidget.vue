@@ -551,7 +551,7 @@ export default {
 }
 
 .content-description{
-  width: 400px;
+  max-width: 400px;
   margin: auto;
   font-size: 14px;
   font-weight: 400;
