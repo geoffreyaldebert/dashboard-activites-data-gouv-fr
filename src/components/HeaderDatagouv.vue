@@ -52,10 +52,29 @@
             </div>
         </header>
         <nav class="header-nav">
-            <div class="hagrid">
-                <div class="row justify-between align-items-center">
+            <div class="hagridMenu">
+                <div class="menuRow justify-between align-items-center">
                     <nav class="nav-tabs col" role="navigation" aria-label="Menu de navigation principal">
                         <a class="tab " href="https://www.data.gouv.fr/fr/datasets/">Données</a>
+                        <a class="tab " href="https://www.data.gouv.fr/fr/reuses/">Réutilisations</a>
+                        <a class="tab " href="https://www.data.gouv.fr/fr/organizations/">Organisations</a>
+                        <a class="tab " href="https://www.data.gouv.fr/fr/posts/">Actualités</a>
+                        <a class="tab " href="https://www.data.gouv.fr/fr/pages/about/ressources/">À propos</a>
+                        <a class="tab " href="https://support.data.gouv.fr/">Nous contacter</a>
+                        <a class="tab-selected" href="https://support.data.gouv.fr/">Activités</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="iconMenu" @click="changeExpandedMenu()">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="menu-2-fill"><path id="ðŸŽ¨ Couleur icÃ´ne" fill-rule="evenodd" clip-rule="evenodd" d="M3 4.16284H21V6.17612H3V4.16284ZM3 11.2112H15V13.2245H3V11.2112ZM3 18.2589H21V20.2722H3V18.2589Z" fill="black"></path></g>
+                </svg>
+            </div>
+            <div class="hagrid2" v-if="!expandedMenu">
+                <div class="menuRow justify-between align-items-center">
+                    <nav class="nav-tabs col" role="navigation" aria-label="Menu de navigation principal">
+                        <a class="tab " href="https://www.data.gouv.fr/fr/datasets/">Données</a>
+                        <br />
                         <a class="tab " href="https://www.data.gouv.fr/fr/reuses/">Réutilisations</a>
                         <a class="tab " href="https://www.data.gouv.fr/fr/organizations/">Organisations</a>
                         <a class="tab " href="https://www.data.gouv.fr/fr/posts/">Actualités</a>
@@ -73,11 +92,130 @@
 </template>
 
 <script>
+
+export default {
+  name: 'HeaderDatagouv',
+  mixins: [],
+  components:{
+  },
+  data(){
+    return {
+      expandedMenu: true,
+    }
+  },
+  props: {
+  },
+  computed: {
+  },
+  methods: {
+    changeExpandedMenu(){
+      this.expandedMenu = !this.expandedMenu
+    },
+  },
+  watch:{
+  },
+  created(){
+  },
+
+
+}
 </script>
 
 <style scoped lang="scss">
 
 
+
+@media screen and (max-width: 900px) {
+    .iconMenu{
+        float: right;
+        margin-top: 20px;
+    }
+    .hagridMenu{
+        display: none;
+    }
+    .hagrid2{
+        height: 340px;
+        display: block
+    }
+    .tab{
+        float: left;
+        width: 100%;
+    }
+    nav a{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .nav-tabs .tab {
+        color: var(--grey-200-850);
+        text-decoration: none;
+    }
+    .tab-selected{
+        display: flex;
+        align-items: center;
+        position: relative;
+        color: var(--grey-200-850);
+        text-decoration: none;
+        color: #3558A2;
+        border-bottom: 2px solid #3558A2;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .iconMenu{
+        display: none;
+    }
+    .hagrid2{
+        display: none;
+    }
+
+    .header-nav{
+        border-top: 1px solid #cecece;
+    }
+
+
+    .nav-tabs {
+        position: relative;
+        display: flex;
+    }
+
+    .nav-tabs .tab {
+        display: flex;
+        align-items: center;
+        position: relative;
+        color: var(--grey-200-850);
+        text-decoration: none;
+        padding: 1rem 0;
+        box-shadow: none;
+    }
+
+    .nav-tabs .tab+.tab {
+        margin-left: 2.25rem;
+    }
+
+    .tab-selected{
+        margin-left: 2.25rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+        color: var(--grey-200-850);
+        text-decoration: none;
+        padding: 1rem 0;
+        color: #3558A2;
+        border-bottom: 2px solid #3558A2;
+    }
+
+    [class^=col-] {
+        flex-grow: 0;
+        margin: 0 10px;
+    }
+}
+
+
+.row, .row-inline {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .test-svg{
     text-decoration: none;
@@ -85,9 +223,6 @@
 
 .header-inner{
     border-bottom: 1px solid #cecece;
-}
-.header-nav{
-    border-top: 1px solid #cecece;
 }
 
 .header-brand {
@@ -114,10 +249,6 @@
     align-items: center;
 }
 
-[class^=col-] {
-    flex-grow: 0;
-    margin: 0 10px;
-}
 
 .ml-lg {
     margin-left: 1.5rem!important;
@@ -140,43 +271,11 @@ div {
 .align-items-center {
     align-items: center;
 }
-.row, .row-inline {
-    display: flex;
-    flex-wrap: wrap;
-}
+
 .row {
     margin: 0 -10px;
 }
 
-.nav-tabs {
-    position: relative;
-    display: flex;
-}
-
-.nav-tabs .tab {
-    display: flex;
-    align-items: center;
-    position: relative;
-    color: var(--grey-200-850);
-    text-decoration: none;
-    padding: 1rem 0;
-}
-
-.nav-tabs .tab+.tab {
-    margin-left: 2.25rem;
-}
-
-.tab-selected{
-    margin-left: 2.25rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    color: var(--grey-200-850);
-    text-decoration: none;
-    padding: 1rem 0;
-    color: #3558A2;
-    border-bottom: 2px solid #3558A2;
-}
 
 .col {
     flex-basis: 0;

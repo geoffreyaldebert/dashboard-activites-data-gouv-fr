@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div class="fr-sidemenu__title">Change de période</div>
+  <div class="periodSelector">
+    <div class="fr-sidemenu__title">Changez de période</div>
     <div class="buttonsHeader">
-      <div :class="selectedPeriode === 'monthly' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('monthly')">Ces 12 derniers mois</div>
+      <div :class="selectedPeriode === 'monthly' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('monthly')">Ces douze derniers mois</div>
       <div :class="selectedPeriode === 'weekly' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('weekly')">Le mois dernier</div>
       <div :class="selectedPeriode === 'daily' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePeriod('daily')">La semaine dernière</div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -43,28 +43,25 @@ export default {
 <style scoped lang="scss">
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
+  @import "../../css/custom.css";
 
-  .buttonsHeader{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  .fr-sidemenu__item, .fr-sidemenu__title{
+    border: 0px;
   }
-  .buttonHeader{
-    padding: 10px;
-    border: 1px solid #ebebeb;
-    margin-right: 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
-    margin-bottom: 20px;
+
+
+@media screen and (max-width: 500px) {
+
+  .periodSelector{
+    padding-top: 0px;
   }
-  .buttonHeader:hover{
-    background-color: #000091;
-    color: white;
+}
+
+@media screen and (min-width: 500px) {
+
+  .periodSelector{
+    padding-top: 30px;
   }
-  .buttonHeaderSelected{
-    background-color: #000091;
-    color: white;
-  }
+}
+
 </style>

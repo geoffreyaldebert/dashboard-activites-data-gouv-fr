@@ -83,7 +83,7 @@ export default {
 
 <style scoped lang="scss">
   .widget{
-    max-width: 500px;
+    max-width: 370px;
   }
   @import "../../css/overload-fonts.css";
   @import "../../css/dsfr.min.css";
@@ -92,20 +92,24 @@ export default {
   }
   .chart{
     width: 100%;
-    height:700px;
+    height:900px;
     .table{
       width: 100%;
       .row{
         cursor: pointer;
-        height: 50px;
+        height: 70px;
         margin-bottom: 10px;
         font-size: 14px;
         position: relative;
         .name{
-            max-width: 80%;
+            max-width: 70%;
+            vertical-align: middle;
+        }
+        .content:hover{
+          color: #3558a2;
         }
         .inner_row{
-          height: 50px;
+          height: 70px;
           width: 50%;
           position: absolute;
           animation: progress-bar 0.8s;
@@ -120,12 +124,14 @@ export default {
             position: relative;
             display: inline-block;
             &.rank{
-              margin-left: 10px;
-              margin-right: 10px;
+              margin-left: 15px;
+              margin-right: 15px;
+              line-height: 70px;
             }
             &.value{
               position: absolute;
               right:10px;
+              line-height: 70px;
             }
           }
         }

@@ -80,7 +80,7 @@ export default {
             datasets: [{
               data: datapoints,
               backgroundColor: gradientFill,
-              borderColor: '#000091',
+              borderColor: '#146BB8',
               type: 'line',
               borderWidth: 4,
               pointRadius: 8,
@@ -296,7 +296,7 @@ export default {
         width: 0.7rem;
         height: 0.7rem;
         border-radius: 50%;
-        background-color: #000091;
+        background-color: #146BB8;
         display: inline-block;
         margin-top: 0.25rem;
       }
