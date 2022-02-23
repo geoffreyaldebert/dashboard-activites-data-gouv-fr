@@ -169,6 +169,7 @@ export default {
         display: none;
     }
 
+
     .header-nav{
         border-top: 1px solid #cecece;
     }
@@ -211,6 +212,11 @@ export default {
     }
 }
 
+.hagridMenu{
+    max-width: 1320px;
+    margin: auto;
+    overflow: hidden;
+}
 
 .row, .row-inline {
     display: flex;
