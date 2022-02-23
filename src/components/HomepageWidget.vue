@@ -125,14 +125,14 @@
               <div class="chart_container">
                   <line-chart indicateur="matomo-stats-visits"></line-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('visites')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'visites'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('visites')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'visites'">
                     <br /><br />
                     <div class="content-description">Cet indicateur mesure le nombre de visites sur data.gouv.fr à l'échelle mensuelle, hebdomadaire ou quotidienne.</div>
@@ -146,14 +146,14 @@
               <div class="chart_container">
                   <line-chart indicateur="matomo-stats-uniq_visits"></line-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('visiteurs-uniques')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'visiteurs-uniques'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('visiteurs-uniques')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'visiteurs-uniques'">
                     <br /><br />
                     
@@ -168,14 +168,14 @@
               <div class="chart_container">
                   <line-chart indicateur="matomo-stats-downloads"></line-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('telechargements')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'telechargements'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('telechargements')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'telechargements'">
                     <br /><br />
                     
@@ -191,14 +191,14 @@
               <div class="chart_container">
                   <bar-chart indicateur="stats-datagouv-datasets" color="#3558a2"></bar-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('datasets')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'datasets'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('datasets')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'datasets'">
                     <br /><br />
                     
@@ -213,14 +213,14 @@
               <div class="chart_container">
                   <bar-chart indicateur="stats-datagouv-reuses" color="#21AB8E"></bar-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('reuses')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'reuses'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('reuses')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'reuses'">
                     <br /><br />
                     
@@ -235,14 +235,14 @@
               <div class="chart_container">
                   <bar-chart indicateur="stats-datagouv-orgas" color="#E4794A"></bar-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('orgas')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'orgas'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('orgas')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'orgas'">
                     <br /><br />
                     
@@ -257,14 +257,14 @@
               <div class="chart_container">
                   <bar-chart indicateur="stats-datagouv-discussions" color="#34BAB5"></bar-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('discussions')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'discussions'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('discussions')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'discussions'">
                     <br /><br />
                     
@@ -279,14 +279,14 @@
               <div class="chart_container">
                   <bar-chart indicateur="stats-datagouv-users" color="#A558A0"></bar-chart>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('users')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'users'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('users')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'users'">
                     <br /><br />
                     
@@ -303,14 +303,14 @@
               <div class="chart_container">
                   <data-table indicateur="matomo-tops-datasets" color="rgba(196, 206, 251, 0.5)"></data-table>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('top10datasets')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10datasets'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('top10datasets')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10datasets'">
                     <br /><br />
                     
@@ -325,14 +325,14 @@
               <div class="chart_container">
                   <data-table indicateur="matomo-tops-reuses" color="rgba(31,141,73,0.3)"></data-table>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('top10reuses')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10reuses'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('top10reuses')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10reuses'">
                     <br /><br />
                     
@@ -350,14 +350,14 @@
               <div class="chart_container">
                   <data-table indicateur="tops-trending-datasets" color="rgba(196, 206, 251, 0.5)"></data-table>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('top10datasetsTrendings')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10datasetsTrendings'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('top10datasetsTrendings')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10datasetsTrendings'">
                     <br /><br />
                     
@@ -372,14 +372,14 @@
               <div class="chart_container">
                   <data-table indicateur="tops-trending-reuses" color="rgba(31,141,73,0.3)"></data-table>
               </div>
-              <div class="chart_info">
+              <div class="chart_info" @click="clickSelectInfo('top10reusesTrendings')">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10reusesTrendings'">
                     <img src="../static/images/down-filled-triangular-arrow.png" width="12" />&nbsp;
                   </span>
                   <span v-else>
                     <img src="../static/images/play.png" width="12" />&nbsp;
                   </span>
-                  <span @click="clickSelectInfo('top10reusesTrendings')">Que mesure cette indicateur ?</span>
+                  <span>Que mesure cet indicateur ?</span>
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10reusesTrendings'">
                     <br /><br />
                     
