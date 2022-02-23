@@ -388,9 +388,11 @@
               </div>
             </div>
           </div>
+          <br />
         </div>
       </div>
     </div>
+    <footer-datagouv></footer-datagouv>
   </div>
 </template>
 
@@ -398,6 +400,7 @@
 
 import BarChart from '@/components/BarChart'
 import LineChart from '@/components/LineChart'
+import FooterDatagouv from './FooterDatagouv.vue'
 
 export default {
   name: 'HomepageWidget',
@@ -562,5 +565,8 @@ export default {
 .fr-sidemenu__item, .fr-sidemenu__title{
   border: 0px;
 }
+
+
+
 
 </style>

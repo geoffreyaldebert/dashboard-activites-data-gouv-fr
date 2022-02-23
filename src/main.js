@@ -9,6 +9,7 @@ import LineChart from './components/LineChart'
 import DataTable from './components/DataTable'
 import PeriodeSelector from './components/PeriodeSelector'
 import HeaderDatagouv from './components/HeaderDatagouv'
+import FooterDatagouv from './components/FooterDatagouv'
 
 import vueCustomElement from 'vue-custom-element'
 //Vue.use(getData(store))
@@ -23,3 +24,4 @@ Vue.customElement('line-chart', LineChart)
 Vue.customElement('data-table', DataTable)
 Vue.customElement('periode-selector', PeriodeSelector)
 Vue.customElement('header-datagouv', HeaderDatagouv)
+Vue.customElement('footer-datagouv', FooterDatagouv)
