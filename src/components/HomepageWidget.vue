@@ -189,7 +189,7 @@
           <div id="datasets" class="widget" v-if="this.selectPage == 'activites'">
             <div>
               <div class="chart_container">
-                  <bar-chart indicateur="stats-datagouv-datasets" color="#869ECE"></bar-chart>
+                  <bar-chart indicateur="stats-datagouv-datasets" color="#3558a2"></bar-chart>
               </div>
               <div class="chart_info">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'datasets'">
@@ -301,7 +301,7 @@
           <div id="top10datasets" class="widget" v-if="this.selectPage == 'tops'">
             <div>
               <div class="chart_container">
-                  <data-table indicateur="matomo-tops-datasets" color="rgba(243,246,254, 1)"></data-table>
+                  <data-table indicateur="matomo-tops-datasets" color="rgba(196, 206, 251, 0.5)"></data-table>
               </div>
               <div class="chart_info">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10datasets'">
@@ -348,7 +348,7 @@
           <div id="top10datasetsTrendings" class="widget" v-if="this.selectPage == 'trendings'">
             <div>
               <div class="chart_container">
-                  <data-table indicateur="tops-trending-datasets" color="rgba(202,202,251,0.5)"></data-table>
+                  <data-table indicateur="tops-trending-datasets" color="rgba(196, 206, 251, 0.5)"></data-table>
               </div>
               <div class="chart_info">
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10datasetsTrendings'">
@@ -556,6 +556,7 @@ export default {
   font-size: 14px;
   font-weight: 400;
   cursor: text;
+  text-justify: auto;
 }
 
 .fr-sidemenu__item, .fr-sidemenu__title{
