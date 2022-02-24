@@ -10,10 +10,10 @@
               <div class="pageSelector">
                 <div class="fr-sidemenu__title">Type d'indicateurs</div>
                 <div class="buttonsTypesActivites">
-                  <div :class="selectPage === 'audience' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePage('audience', '#visites')">Audience</div>
+                  <div :class="selectPage === 'audience' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePage('audience', '#visites')">Audiences</div>
                   <div :class="selectPage === 'activites' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePage('activites', '#datasets')">Activités</div>
-                  <div :class="selectPage === 'tops' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePage('tops', '#top10datasets')">les Tops</div>
-                  <div :class="selectPage === 'trendings' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePage('trendings', '#top10datasetsTrendings')">les Tendances</div>
+                  <div :class="selectPage === 'tops' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePage('tops', '#top10datasets')">Les tops</div>
+                  <div :class="selectPage === 'trendings' ? 'buttonHeader buttonHeaderSelected' : 'buttonHeader'" @click="changePage('trendings', '#top10datasetsTrendings')">Les tendances</div>
                 </div>
               </div>
               
@@ -361,7 +361,7 @@
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10datasetsTrendings'">
                     <br /><br />
                     
-                    <div class="content-description">Il s’agit des 10 pages de jeux de données créés récemment les plus consultées.</div>
+                    <div class="content-description">Il s’agit des 10 pages de jeux de données créés récemment les plus consultées sur la période sélectionnée.</div>
                   </span>
               </div>
             </div>
@@ -383,7 +383,7 @@
                   <span v-if="this.selectInfo && this.selectInfoChart == 'top10reusesTrendings'">
                     <br /><br />
                     
-                    <div class="content-description">Il s’agit des 10 pages de réutilisations créées récemment les plus consultées.</div>
+                    <div class="content-description">Il s’agit des 10 pages de réutilisations créées récemment les plus consultées sur la période sélectionnée.</div>
                   </span>
               </div>
             </div>
@@ -505,16 +505,17 @@ export default {
 }
 
 .page {
+    max-width: 1320px;
     display: flex;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     margin: 0 auto;
-    padding: 0;
+    //padding: 0;
     height: 100%;
 }
 
 .menu{
   min-width: 300px;
-  margin-left: auto;
+  //margin-left: auto;
 }
 
 .menuContent{
